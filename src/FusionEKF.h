@@ -14,7 +14,7 @@ public:
   /**
   * Constructor.
   */
-  FusionEKF();
+  FusionEKF( float noise_ax=9, float noise_ay=9 );
 
   /**
   * Destructor.
@@ -36,14 +36,19 @@ private:
   bool is_initialized_;
 
   // previous timestamp
-  long previous_timestamp_;
+  long long previous_timestamp_;
 
   // tool object used to compute Jacobian and RMSE
   Tools tools;
+
   Eigen::MatrixXd R_laser_;
   Eigen::MatrixXd R_radar_;
   Eigen::MatrixXd H_laser_;
   Eigen::MatrixXd Hj_;
+
+  // variance of acceleration noise on x and y directions
+  float noise_ax_;
+  float noise_ay_;
 };
 
 #endif /* FusionEKF_H_ */
